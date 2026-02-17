@@ -1,0 +1,36 @@
+/**:  # Wildcard — matches /bobble/balance_node regardless of namespace
+  ros__parameters:
+    control_rate: 500.0         # Hz — matches controller_manager update_rate
+
+    # Physical
+    wheel_radius: 0.0275        # meters (must match URDF)
+    wheel_separation: 0.16      # meters (must match URDF)
+
+    # Safety
+    max_tilt_safety: 0.349      # ~20 deg — motor shutdown if exceeded
+    startup_tilt_threshold: 0.175  # ~10 deg — must be within this to start balancing
+    max_effort: 0.4             # Max total effort magnitude per wheel
+
+    # Velocity PID (outer loop): desired_velocity → desired_tilt
+    velocity_pid:
+      kp: 0.125
+      ki: 0.01
+      kd: 0.05
+      output_limit: 0.1484     # 8.5 deg in radians — max desired tilt
+      max_integral: 0.025      # Anti-windup
+      output_filter: 0.99      # Heavy smoothing (0=none, 1=frozen)
+
+    # Tilt PID (inner loop): tilt_error → effort (P+D only)
+    tilt_pid:
+      kp: 2.5
+      ki: 0.0                  # No integral — pure PD
+      kd: 0.5                  # Uses pitch rate from EKF for D term
+      output_filter: 0.05      # Light smoothing
+
+    # Turning PID: turn_rate_error → heading_effort
+    turning_pid:
+      kp: 0.25
+      ki: 0.05
+      kd: 0.0                  # No derivative
+      output_filter: 0.5       # Moderate smoothing
+      max_integral: 1.0        # Anti-windup
