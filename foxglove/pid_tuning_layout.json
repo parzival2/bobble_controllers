@@ -1,0 +1,129 @@
+{
+  "configById": {
+    "Parameters!tilt": {
+      "search": "tilt_pid",
+      "title": "Parameters"
+    },
+    "Parameters!vel": {
+      "search": "velocity_pid",
+      "title": "Parameters"
+    },
+    "Parameters!all": {},
+    "Plot!tilt": {
+      "title": "Pitch & Desired Tilt (deg)",
+      "paths": [
+        {
+          "value": "/bobble/balance_node/debug.data[1]",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "pitch",
+          "color": "#4e98e2"
+        },
+        {
+          "value": "/bobble/balance_node/debug.data[2]",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "desired_tilt",
+          "color": "#f5a623"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "followingViewWidth": 30,
+      "sidebarDimension": 240
+    },
+    "Plot!effort": {
+      "title": "Effort Output",
+      "paths": [
+        {
+          "value": "/bobble/balance_node/debug.data[3]",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "tilt_effort",
+          "color": "#e24e4e"
+        },
+        {
+          "value": "/bobble/balance_node/debug.data[4]",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "heading_effort",
+          "color": "#4ee29e"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "followingViewWidth": 30,
+      "sidebarDimension": 240
+    },
+    "Plot!velocity": {
+      "title": "Forward Velocity (m/s)",
+      "paths": [
+        {
+          "value": "/bobble/balance_node/debug.data[5]",
+          "enabled": true,
+          "timestampMethod": "receiveTime",
+          "label": "fwd_velocity",
+          "color": "#9b59b6"
+        }
+      ],
+      "showXAxisLabels": true,
+      "showYAxisLabels": true,
+      "showLegend": true,
+      "legendDisplay": "floating",
+      "showPlotValuesInLegend": true,
+      "isSynced": true,
+      "xAxisVal": "timestamp",
+      "followingViewWidth": 30,
+      "sidebarDimension": 240
+    },
+    "Tab!params": {
+      "tabs": [
+        {
+          "title": "Tilt PID",
+          "layout": "Parameters!tilt"
+        },
+        {
+          "title": "Velocity PID",
+          "layout": "Parameters!vel"
+        },
+        {
+          "title": "All",
+          "layout": "Parameters!all"
+        }
+      ],
+      "activeTabIdx": 1
+    }
+  },
+  "globalVariables": {},
+  "userNodes": {},
+  "linkedGlobalVariables": [],
+  "playbackConfig": {
+    "speed": 1
+  },
+  "layout": {
+    "direction": "row",
+    "first": {
+      "direction": "column",
+      "first": "Plot!tilt",
+      "second": {
+        "direction": "column",
+        "first": "Plot!effort",
+        "second": "Plot!velocity",
+        "splitPercentage": 50
+      },
+      "splitPercentage": 40
+    },
+    "second": "Tab!params",
+    "splitPercentage": 70
+  }
+}

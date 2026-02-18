@@ -9,14 +9,17 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     pkg_share = get_package_share_directory('bobble_controllers')
-    pid_config = os.path.join(pkg_share, 'config', 'balance_pid.yaml')
+    default_pid_config = os.path.join(pkg_share, 'config', 'tuning_pid.yaml')
 
     use_sim_time = LaunchConfiguration('use_sim_time')
     namespace = LaunchConfiguration('namespace')
+    params_file = LaunchConfiguration('params_file')
 
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='true'),
         DeclareLaunchArgument('namespace', default_value='bobble'),
+        DeclareLaunchArgument('params_file', default_value=default_pid_config,
+                              description='Path to PID parameter YAML file'),
 
         Node(
             package='bobble_controllers',
@@ -24,6 +27,6 @@ def generate_launch_description():
             name='balance_node',
             namespace=namespace,
             output='screen',
-            parameters=[pid_config, {'use_sim_time': use_sim_time}],
+            parameters=[params_file, {'use_sim_time': use_sim_time}],
         ),
     ])

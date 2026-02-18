@@ -1,0 +1,36 @@
+/**:
+  ros__parameters:
+    control_rate: 500.0
+
+    # Physical
+    wheel_radius: 0.0275
+    wheel_separation: 0.16
+
+    # Safety
+    max_tilt_safety: 0.349        # ~20 deg
+    startup_tilt_threshold: 0.175 # ~10 deg
+    max_effort: 0.4
+
+    # ── Tune tilt PID first (inner loop) ──
+    tilt_pid:
+      kp: 100.0
+      ki: 0.0
+      kd: 5.0
+      output_filter: 0.05
+
+    # ── Then tune velocity PID (outer loop) ──
+    velocity_pid:
+      kp: 0.0
+      ki: 0.0
+      kd: 0.0
+      output_limit: 0.1484
+      max_integral: 0.025
+      output_filter: 0.99
+
+    # Turning PID (keep defaults)
+    turning_pid:
+      kp: 0.25
+      ki: 0.05
+      kd: 0.0
+      output_filter: 0.5
+      max_integral: 1.0
